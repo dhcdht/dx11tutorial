@@ -1,2 +1,2 @@
 DX11 tutorial
-base on shader model 4.0 and dx11 API
+base on http://www.rastertek.com/tutdx11.html change shader model to 4.0 and DX10 but use DX11 APIs
