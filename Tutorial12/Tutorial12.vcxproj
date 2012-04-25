@@ -18,7 +18,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -60,6 +60,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bitmapClass.cpp" />
+    <ClCompile Include="cameraClass.cpp" />
+    <ClCompile Include="d3dClass.cpp" />
+    <ClCompile Include="fontClass.cpp" />
+    <ClCompile Include="graphicsClass.cpp" />
+    <ClCompile Include="inputClass.cpp" />
+    <ClCompile Include="lightClass.cpp" />
+    <ClCompile Include="lightShaderClass.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="modelClass.cpp" />
+    <ClCompile Include="systemClass.cpp" />
+    <ClCompile Include="textureClass.cpp" />
+    <ClCompile Include="textureShaderClass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bitmapClass.h" />
+    <ClInclude Include="cameraClass.h" />
+    <ClInclude Include="d3dClass.h" />
+    <ClInclude Include="fontClass.h" />
+    <ClInclude Include="fontShaderClass.h" />
+    <ClInclude Include="graphicsClass.h" />
+    <ClInclude Include="inputClass.h" />
+    <ClInclude Include="lightClass.h" />
+    <ClInclude Include="lightShaderClass.h" />
+    <ClInclude Include="modelClass.h" />
+    <ClInclude Include="systemClass.h" />
+    <ClInclude Include="textureClass.h" />
+    <ClInclude Include="textureShaderClass.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\cube.txt" />
+    <None Include="shader\font.psh" />
+    <None Include="shader\font.vsh" />
+    <None Include="shader\light.psh" />
+    <None Include="shader\light.vsh" />
+    <None Include="shader\texture.psh" />
+    <None Include="shader\texture.vsh" />
+    <None Include="tex\box.png" />
+    <None Include="tex\sky.dds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
