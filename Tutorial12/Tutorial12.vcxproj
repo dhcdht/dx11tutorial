@@ -64,6 +64,7 @@
     <ClCompile Include="cameraClass.cpp" />
     <ClCompile Include="d3dClass.cpp" />
     <ClCompile Include="fontClass.cpp" />
+    <ClCompile Include="fontShaderClass.cpp" />
     <ClCompile Include="graphicsClass.cpp" />
     <ClCompile Include="inputClass.cpp" />
     <ClCompile Include="lightClass.cpp" />

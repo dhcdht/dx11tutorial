@@ -20,6 +20,60 @@ using namespace std;
 
 class FontShaderClass
 {
+private:
+	struct ConstantBufferType 
+	{
+		D3DXMATRIX world;
+		D3DXMATRIX view;
+		D3DXMATRIX projection;
+	};
+
+	struct  PixelBufferType
+	{
+		D3DXVECTOR4 pixelColor;
+	};
+
+public:
+	FontShaderClass();
+	FontShaderClass(const FontShaderClass &aFontShaderClass);
+	~FontShaderClass();
+
+	bool initialize(
+		ID3D11Device *aD3DDevice, HWND aHwnd);
+	void shutdown();
+	bool render(
+		ID3D11DeviceContext *aD3DDevice, 
+		int aIndexCount, D3DXMATRIX aWorldMatrix,
+		D3DXMATRIX aViewMatrix, D3DXMATRIX aProjectionMatrix,
+		ID3D11ShaderResourceView *aTexture, D3DXVECTOR4 aPixelColor);
+
+private:
+	bool initializeShader(
+		ID3D11Device *aD3DDevice, HWND aHwnd,
+		WCHAR *aVSFileName, WCHAR *aPSFileName);
+	void shutdownShader();
+	void outputShaderErrorMessage(
+		ID3D10Blob *aErrorMessage, HWND aHwnd,
+		WCHAR *aShaderFileName);
+
+	bool setShaderParameters(
+		ID3D11DeviceContext *aD3DDeviceContext, 
+		D3DXMATRIX aWorldMatrix, D3DXMATRIX aViewMatrix,
+		D3DXMATRIX aProjectionMatrix, 
+		ID3D11ShaderResourceView *aTexture,
+		D3DXVECTOR4 aPixelColor);
+	void renderShader(
+		ID3D11DeviceContext *aD3DDeviceContext,
+		int aIndexCount);
+
+private:
+	ID3D11VertexShader *m_vertexShader;
+	ID3D11PixelShader *m_pixelShader;
+	ID3D11InputLayout *m_layout;
+	ID3D11Buffer *m_constantBuffer;
+	ID3D11SamplerState *m_sampleState;
+
+	ID3D11Buffer *m_pixelBuffer;
 };
 
 #endif // fontShaderClass_h__
