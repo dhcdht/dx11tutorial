@@ -50,6 +50,9 @@ public:
 	void turnZBufferOn();
 	void turnZBufferOff();
 
+	void turnAlphaBlendingOn();
+	void turnAlphaBlendingOff();
+
 private:
 	bool m_vsyncEnabled;
 	int m_videoCardMemory;
@@ -67,6 +70,9 @@ private:
 	D3DXMATRIX m_orthoMatrix;
 
 	ID3D11DepthStencilState *m_depthDisabledStencilState;
+
+	ID3D11BlendState *m_alphaEnableBlendingState;
+	ID3D11BlendState *m_alphaDisableBlendingState;
 };
 
 #endif // d3dClass_h__
