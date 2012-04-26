@@ -57,6 +57,9 @@
     <ClCompile Include="fontShaderClass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="textClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmapClass.h">
@@ -96,6 +99,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="fontShaderClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="textClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

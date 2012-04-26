@@ -72,6 +72,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="modelClass.cpp" />
     <ClCompile Include="systemClass.cpp" />
+    <ClCompile Include="textClass.cpp" />
     <ClCompile Include="textureClass.cpp" />
     <ClCompile Include="textureShaderClass.cpp" />
   </ItemGroup>
@@ -87,6 +88,7 @@
     <ClInclude Include="lightShaderClass.h" />
     <ClInclude Include="modelClass.h" />
     <ClInclude Include="systemClass.h" />
+    <ClInclude Include="textClass.h" />
     <ClInclude Include="textureClass.h" />
     <ClInclude Include="textureShaderClass.h" />
   </ItemGroup>
