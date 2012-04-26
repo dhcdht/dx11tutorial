@@ -111,7 +111,7 @@ bool FontShaderClass::initializeShader( ID3D11Device *aD3DDevice, HWND aHwnd, WC
 
 	result = D3DX11CompileFromFile(
 		aPSFileName, NULL, NULL, "fontPixelShader",
-		"vs_4_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL,
+		"ps_4_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, NULL,
 		&pixelShaderBuffer, &errorMessage, NULL);
 	if (FAILED(result))
 	{
@@ -153,9 +153,9 @@ bool FontShaderClass::initializeShader( ID3D11Device *aD3DDevice, HWND aHwnd, WC
 	polygonLayout[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 	polygonLayout[0].InstanceDataStepRate = 0;
 
-	polygonLayout[1].SemanticName = "TEXCOORD0";
+	polygonLayout[1].SemanticName = "TEXCOORD";
 	polygonLayout[1].SemanticIndex = 0;
-	polygonLayout[1].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	polygonLayout[1].Format = DXGI_FORMAT_R32G32_FLOAT;
 	polygonLayout[1].InputSlot = 0;
 	polygonLayout[1].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 	polygonLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;

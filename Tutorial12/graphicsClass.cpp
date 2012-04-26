@@ -22,6 +22,8 @@ GraphicsClass::GraphicsClass()
 
 	m_textureShader = 0;
 	m_bitmap = 0;
+
+	m_text = 0;
 }
 
 GraphicsClass::GraphicsClass( const GraphicsClass& )
@@ -127,11 +129,35 @@ bool GraphicsClass::initialize( int aWidth, int aHeight, HWND aHwnd )
 		return false;
 	}
 
+	m_text = new TextClass;
+	if (!m_text)
+	{
+		return false;
+	}
+
+	D3DXMATRIX baseViewMatrix;
+	m_camera->render();
+	m_camera->getViewMatrix(baseViewMatrix);
+	result = m_text->initialize(
+		m_d3d->getDevice(), m_d3d->getDeviceContext(),
+		aHwnd, aWidth, aHeight, baseViewMatrix);
+	if (!result)
+	{
+		MessageBox(aHwnd, L"初始化字体对象失败", L"Error", MB_OK);
+		return false;
+	}
+
 	return true;
 }
 
 void GraphicsClass::shutdown()
 {
+	if (m_text)
+	{
+		delete m_text;
+		m_text = 0;
+	}
+
 	if (m_bitmap)
 	{
 		m_bitmap->shutdown();
@@ -207,13 +233,13 @@ bool GraphicsClass::render(float aRotation)
 	m_d3d->beginScene(0.5f, 0.5f, 0.5f, 1.0f);
 
 	m_camera->render();
-
+	
 	m_camera->getViewMatrix(viewMatrix);
 	m_d3d->getWorldMatrix(worldMatrix);
 	m_d3d->getProjectionMatrix(projectionMatrix);
 
 	m_d3d->getOrthoMatrix(orthoMatrix);
-
+	
 	m_d3d->turnZBufferOff();
 
 	result = m_bitmap->render(
@@ -233,7 +259,7 @@ bool GraphicsClass::render(float aRotation)
 	}
 
 	m_d3d->turnZBufferOn();
-
+	
 	D3DXMatrixRotationY(&worldMatrix, aRotation);
 	
 	m_model->render(m_d3d->getDeviceContext());
@@ -252,6 +278,20 @@ bool GraphicsClass::render(float aRotation)
 	{
 		return false;
 	}
+	
+	m_d3d->turnZBufferOff();
+	m_d3d->turnAlphaBlendingOn();
+
+	result = m_text->render(
+		m_d3d->getDeviceContext(),
+		worldMatrix, orthoMatrix);
+	if (!result)
+	{
+		return false;
+	}
+
+	m_d3d->turnAlphaBlendingOff();
+	m_d3d->turnZBufferOn();
 
 	m_d3d->endScene();
 
