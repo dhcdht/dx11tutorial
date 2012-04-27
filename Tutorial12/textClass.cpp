@@ -207,10 +207,10 @@ bool TextClass::initializeSentence(
 		return false;
 	}
 
-	indexBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	indexBufferDesc.ByteWidth = sizeof(unsigned int) * (*aSentence)->indexCount;
-	indexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	indexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	indexBufferDesc.CPUAccessFlags = 0;
 	indexBufferDesc.MiscFlags = 0;
 	indexBufferDesc.StructureByteStride = 0;
 
