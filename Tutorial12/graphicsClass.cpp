@@ -59,7 +59,7 @@ bool GraphicsClass::initialize( int aWidth, int aHeight, HWND aHwnd )
 	{
 		return false;
 	}
-	m_camera->setPosition(0.0f, 0.0f, -10.0f);
+	//m_camera->setPosition(0.0f, 0.0f, -10.0f);
 
 	m_model = new ModelClass;
 	if (NULL == m_model)
@@ -129,15 +129,17 @@ bool GraphicsClass::initialize( int aWidth, int aHeight, HWND aHwnd )
 		return false;
 	}
 
+	D3DXMATRIX baseViewMatrix;
+	m_camera->setPosition(0.0f, 0.0f, -1.0f);
+	m_camera->render();
+	m_camera->getViewMatrix(baseViewMatrix);
+
 	m_text = new TextClass;
 	if (!m_text)
 	{
 		return false;
 	}
 
-	D3DXMATRIX baseViewMatrix;
-	m_camera->render();
-	m_camera->getViewMatrix(baseViewMatrix);
 	result = m_text->initialize(
 		m_d3d->getDevice(), m_d3d->getDeviceContext(),
 		aHwnd, aWidth, aHeight, baseViewMatrix);
@@ -147,6 +149,8 @@ bool GraphicsClass::initialize( int aWidth, int aHeight, HWND aHwnd )
 		return false;
 	}
 
+
+	m_camera->setPosition(0.0f, 0.0f, -10.0f);
 	return true;
 }
 

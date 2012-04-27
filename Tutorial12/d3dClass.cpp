@@ -22,7 +22,7 @@ D3DClass::D3DClass()
 	m_depthStencilView = NULL;
 	m_rasterState = NULL;
 
-	m_depthStencilState = 0;
+	m_depthDisabledStencilState = 0;
 
 	m_alphaEnableBlendingState = 0;
 	m_alphaDisableBlendingState = 0;
