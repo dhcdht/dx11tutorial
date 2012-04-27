@@ -77,8 +77,8 @@ bool TextClass::initialize(
 	}
 
 	result = updateSentence(
-		m_sentence1, "Hello", 0, 100,
-		0.0f, 1.0f, 1.0f, aD3DDeviceContext);
+		m_sentence1, "Hello", 100, 100,
+		1.0f, 1.0f, 1.0f, aD3DDeviceContext);
 	if (!result)
 	{
 		return false;
@@ -91,8 +91,8 @@ bool TextClass::initialize(
 	}
 
 	result = updateSentence(
-		m_sentence2, "Goodbye", 0, 300,
-		1.0f, 0.0f, 1.0f, aD3DDeviceContext);
+		m_sentence2, "Goodbye", 100, 200,
+		1.0f, 1.0f, 0.0f, aD3DDeviceContext);
 	if (!result)
 	{
 		return false;
