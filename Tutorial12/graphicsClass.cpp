@@ -286,6 +286,8 @@ bool GraphicsClass::render(float aRotation)
 	m_d3d->turnZBufferOff();
 	m_d3d->turnAlphaBlendingOn();
 
+	m_d3d->getWorldMatrix(worldMatrix);
+
 	result = m_text->render(
 		m_d3d->getDeviceContext(),
 		worldMatrix, orthoMatrix);
