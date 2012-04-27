@@ -57,7 +57,7 @@ void FontClass::shutdown()
 	return ;
 }
 
-ID3D11ShaderResourceView* FontClass::GetTexture()
+ID3D11ShaderResourceView* FontClass::getTexture()
 {
 	return m_texture->getTexture();
 }

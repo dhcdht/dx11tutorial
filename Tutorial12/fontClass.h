@@ -44,7 +44,7 @@ public:
 		char *aFontFileName, WCHAR *aTextureFileName);
 	void shutdown();
 
-	ID3D11ShaderResourceView* GetTexture();
+	ID3D11ShaderResourceView* getTexture();
 
 	void buildVertexArray(
 		void *vertices, char *sentence,
