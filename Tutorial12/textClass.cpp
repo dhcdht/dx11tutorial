@@ -322,7 +322,7 @@ bool TextClass::renderSentence(ID3D11DeviceContext* deviceContext, SentenceType*
 
 	pixelColor = D3DXVECTOR4(sentence->red, sentence->green, sentence->blue, 1.0f);
 
-	result = m_fontShader->render(deviceContext, sentence->indexCount, worldMatrix, m_baseViewMatrix, orthoMatrix, m_font->GetTexture(), 
+	result = m_fontShader->render(deviceContext, sentence->indexCount, worldMatrix, m_baseViewMatrix, orthoMatrix, m_font->getTexture(), 
 		pixelColor);
 	if(!result)
 	{
