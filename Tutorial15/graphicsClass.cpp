@@ -211,7 +211,8 @@ void GraphicsClass::shutdown()
 	return ;
 }
 
-bool GraphicsClass::frame(int aMouseX, int aMouseY)
+bool GraphicsClass::frame(int aMouseX, int aMouseY, 
+	int aFPS, int aCPU, float aFrameTime)
 {
 	bool result;
 
@@ -225,6 +226,18 @@ bool GraphicsClass::frame(int aMouseX, int aMouseY)
 
 	result = m_text->setMousePosition(
 		aMouseX, aMouseY, m_d3d->getDeviceContext());
+	if (!result)
+	{
+		return false;
+	}
+
+	result = m_text->setFPS(aFPS, m_d3d->getDeviceContext());
+	if (!result)
+	{
+		return false;
+	}
+
+	result = m_text->setCPU(aCPU, m_d3d->getDeviceContext());
 	if (!result)
 	{
 		return false;

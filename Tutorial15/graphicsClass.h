@@ -35,7 +35,8 @@ public:
 
 	bool initialize(int aWidth, int aHeight, HWND aHwnd);
 	void shutdown();
-	bool frame(int aMouseX, int aMouseY);
+	bool frame(int aMouseX, int aMouseY,
+		int aFPS, int aCPU, float aFrameTime);
 
 private:
 	bool render(float aRotation);

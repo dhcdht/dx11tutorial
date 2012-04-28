@@ -15,6 +15,10 @@ SystemClass::SystemClass()
 {
 	m_input = NULL;
 	m_graphics = NULL;
+
+	m_fps = NULL;
+	m_cpu = NULL;
+	m_timer = NULL;
 }
 
 SystemClass::SystemClass( const SystemClass& )
@@ -59,19 +63,64 @@ bool SystemClass::initialize()
 		return false;
 	}
 
+	m_fps = new FPSClass;
+	if (!m_fps)
+	{
+		return false;
+	}
+	m_fps->initialize();
+
+	m_cpu = new CPUClass;
+	if (!m_cpu)
+	{
+		return false;
+	}
+	m_cpu->initialize();
+
+	m_timer = new TimerClass;
+	if (!m_timer)
+	{
+		return false;
+	}
+	result = m_timer->initialize();
+	if (!result)
+	{
+		MessageBox(m_hwnd, L"初始化计时器失败", L"Error", MB_OK);
+		return false;
+	}
+
 	return true;
 }
 
 void SystemClass::shutdown()
 {
-	if (NULL == m_graphics)
+	if (NULL != m_timer)
+	{
+		delete m_timer;
+		m_timer = NULL;
+	}
+
+	if (NULL != m_cpu)
+	{
+		m_cpu->shutdown();
+		delete m_cpu;
+		m_cpu = NULL;
+	}
+
+	if (NULL != m_fps)
+	{
+		delete m_fps;
+		m_fps = NULL;
+	}
+
+	if (NULL != m_graphics)
 	{
 		m_graphics->shutdown();
 		delete m_graphics;
 		m_graphics = NULL;
 	}
 
-	if (NULL == m_input)
+	if (NULL != m_input)
 	{
 		m_input->shutdown();
 		delete m_input;
@@ -125,6 +174,10 @@ bool SystemClass::frame()
 	bool result;
 	int mouseX, mouseY;
 
+	m_timer->frame();
+	m_fps->frame();
+	m_cpu->frame();
+
 	result = m_input->frame();
 	if (!result)
 	{
@@ -133,7 +186,9 @@ bool SystemClass::frame()
 
 	m_input->getMouseLocation(mouseX, mouseY);
 
-	result = m_graphics->frame(mouseX, mouseY);
+	result = m_graphics->frame(mouseX, mouseY,
+		m_fps->getFPS(), m_cpu->getCPUPercentage(),
+		m_timer->getTime());
 	if (!result)
 	{
 		return false;

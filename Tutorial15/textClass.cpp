@@ -19,6 +19,8 @@ TextClass::TextClass()
 
 	m_sentence1 = 0;
 	m_sentence2 = 0;
+	m_sentence3 = 0;
+	m_sentence4 = 0;
 }
 
 
@@ -84,6 +86,18 @@ bool TextClass::initialize(
 		return false;
 	}
 
+	result = initializeSentence(&m_sentence3, 16, aD3DDevice);
+	if(!result)
+	{
+		return false;
+	}
+
+	result = initializeSentence(&m_sentence4, 16, aD3DDevice);
+	if(!result)
+	{
+		return false;
+	}
+
 	/*
 	result = updateSentence(
 		m_sentence1, "Hello", 100, 100, 1.0f, 1.0f, 1.0f,
@@ -111,6 +125,10 @@ void TextClass::shutdown()
 	releaseSentence(&m_sentence1);
 
 	releaseSentence(&m_sentence2);
+
+	releaseSentence(&m_sentence3);
+
+	releaseSentence(&m_sentence4);
 
 	if(m_fontShader)
 	{
@@ -146,6 +164,22 @@ bool TextClass::render(
 
 	result = renderSentence(
 		aD3DDeviceContext, m_sentence2,
+		aWorldMatrix, aOrthoMatrix);
+	if(!result)
+	{
+		return false;
+	}
+
+	result = renderSentence(
+		aD3DDeviceContext, m_sentence3,
+		aWorldMatrix, aOrthoMatrix);
+	if(!result)
+	{
+		return false;
+	}
+
+	result = renderSentence(
+		aD3DDeviceContext, m_sentence4,
 		aWorldMatrix, aOrthoMatrix);
 	if(!result)
 	{
@@ -401,6 +435,78 @@ bool TextClass::setMousePosition( int aMouseX, int aMouseY, ID3D11DeviceContext 
 	result = updateSentence(
 		m_sentence2, mouseString,
 		100, 120, 1.0f, 1.0f, 1.0f, aD3DDeviceContext);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool TextClass::setFPS(
+	int aFPS, ID3D11DeviceContext *aD3DDeviceContext )
+{
+	char tempString[16];
+	char fpsString[16];
+	float red, green, blue;
+	bool result;
+
+	if (aFPS > 9999)
+	{
+		aFPS = 9999;
+	}
+
+	_itoa_s(aFPS, tempString, 10);
+
+	strcpy_s(fpsString, "FPS : ");
+	strcat_s(fpsString, tempString);
+
+	if (aFPS >= 60)
+	{
+		red = 0.0f;
+		green = 1.0f;
+		blue = 0.0f;
+	}
+	else if (aFPS >= 30)
+	{
+		red = 1.0f;
+		green = 1.0f;
+		blue = 0.0f;
+	}
+	else
+	{
+		red = 1.0f;
+		green = 0.0f;
+		blue = 0.0f;
+	}
+
+	result = updateSentence(
+		m_sentence3, fpsString, 100, 140, red, green, blue,
+		aD3DDeviceContext);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool TextClass::setCPU( 
+	int aCPU, ID3D11DeviceContext *aD3DDeviceContext )
+{
+	char tempString[16];
+	char cpuString[16];
+	bool result;
+
+	_itoa_s(aCPU, tempString, 10);
+	
+	strcpy_s(cpuString, "CPU : ");
+	strcat_s(cpuString, tempString);
+	strcat_s(cpuString, "%");
+
+	result = updateSentence(
+		m_sentence4, cpuString, 100, 160, 0.0f, 1.0f, 0.0f,
+		aD3DDeviceContext);
 	if (!result)
 	{
 		return false;

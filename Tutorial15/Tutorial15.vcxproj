@@ -62,9 +62,11 @@
   <ItemGroup>
     <ClCompile Include="bitmapClass.cpp" />
     <ClCompile Include="cameraClass.cpp" />
+    <ClCompile Include="cpuClass.cpp" />
     <ClCompile Include="d3dClass.cpp" />
     <ClCompile Include="fontClass.cpp" />
     <ClCompile Include="fontShaderClass.cpp" />
+    <ClCompile Include="fpsClass.cpp" />
     <ClCompile Include="graphicsClass.cpp" />
     <ClCompile Include="inputClass.cpp" />
     <ClCompile Include="lightClass.cpp" />
@@ -75,13 +77,16 @@
     <ClCompile Include="textClass.cpp" />
     <ClCompile Include="textureClass.cpp" />
     <ClCompile Include="textureShaderClass.cpp" />
+    <ClCompile Include="timerClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmapClass.h" />
     <ClInclude Include="cameraClass.h" />
+    <ClInclude Include="cpuClass.h" />
     <ClInclude Include="d3dClass.h" />
     <ClInclude Include="fontClass.h" />
     <ClInclude Include="fontShaderClass.h" />
+    <ClInclude Include="fpsClass.h" />
     <ClInclude Include="graphicsClass.h" />
     <ClInclude Include="inputClass.h" />
     <ClInclude Include="lightClass.h" />
@@ -91,6 +96,7 @@
     <ClInclude Include="textClass.h" />
     <ClInclude Include="textureClass.h" />
     <ClInclude Include="textureShaderClass.h" />
+    <ClInclude Include="timerClass.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="obj\cube.txt" />

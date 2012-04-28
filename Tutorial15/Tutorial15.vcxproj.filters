@@ -60,6 +60,15 @@
     <ClCompile Include="textureShaderClass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="fpsClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cpuClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="timerClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmapClass.h">
@@ -102,6 +111,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="textureShaderClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fpsClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpuClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="timerClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
