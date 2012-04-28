@@ -211,7 +211,7 @@ void GraphicsClass::shutdown()
 	return ;
 }
 
-bool GraphicsClass::frame()
+bool GraphicsClass::frame(int aMouseX, int aMouseY)
 {
 	bool result;
 
@@ -221,6 +221,13 @@ bool GraphicsClass::frame()
 	if (rotation > 360.0f)
 	{
 		rotation -= 360.0f;
+	}
+
+	result = m_text->setMousePosition(
+		aMouseX, aMouseY, m_d3d->getDeviceContext());
+	if (!result)
+	{
+		return false;
 	}
 
 	result = render(rotation);

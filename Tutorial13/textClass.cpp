@@ -78,15 +78,16 @@ bool TextClass::initialize(
 		return false;
 	}
 
-	result = updateSentence(
-		m_sentence1, "Hello", 100, 100, 1.0f, 1.0f, 1.0f,
-		aD3DDeviceContext);
+	result = initializeSentence(&m_sentence2, 16, aD3DDevice);
 	if(!result)
 	{
 		return false;
 	}
 
-	result = initializeSentence(&m_sentence2, 16, aD3DDevice);
+	/*
+	result = updateSentence(
+		m_sentence1, "Hello", 100, 100, 1.0f, 1.0f, 1.0f,
+		aD3DDeviceContext);
 	if(!result)
 	{
 		return false;
@@ -99,6 +100,7 @@ bool TextClass::initialize(
 	{
 		return false;
 	}
+	*/
 
 	return true;
 }
@@ -367,6 +369,41 @@ bool TextClass::renderSentence(
 	if(!result)
 	{
 		false;
+	}
+
+	return true;
+}
+
+bool TextClass::setMousePosition( int aMouseX, int aMouseY, ID3D11DeviceContext *aD3DDeviceContext )
+{
+	char tempString[16];
+	char mouseString[16];
+	bool result;
+
+	_itoa_s(aMouseX, tempString, 10);
+
+	strcpy_s(mouseString, "Mouse X:");
+	strcat_s(mouseString, tempString);
+
+	result = updateSentence(
+		m_sentence1, mouseString,
+		100, 100, 1.0f, 1.0f, 1.0f, aD3DDeviceContext);
+	if (!result)
+	{
+		return false;
+	}
+
+	_itoa_s(aMouseY, tempString, 10);
+	
+	strcpy_s(mouseString, "Mouse Y:");
+	strcat_s(mouseString, tempString);
+
+	result = updateSentence(
+		m_sentence2, mouseString,
+		100, 120, 1.0f, 1.0f, 1.0f, aD3DDeviceContext);
+	if (!result)
+	{
+		return false;
 	}
 
 	return true;

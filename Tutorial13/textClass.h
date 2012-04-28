@@ -51,6 +51,10 @@ public:
 		ID3D11DeviceContext *aD3DDeviceContext,
 		D3DXMATRIX aWorldMatrix, D3DXMATRIX aOrthoMatrix);
 
+	bool setMousePosition(
+		int aMouseX, int aMouseY, 
+		ID3D11DeviceContext *aD3DDeviceContext);
+
 private:
 	bool initializeSentence(
 		SentenceType **aSentence,

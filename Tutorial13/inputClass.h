@@ -12,22 +12,43 @@
 #ifndef inputClass_h__
 #define inputClass_h__
 
+#define DIRECTINPUT_VERSION 0x0800
+
+#pragma comment(lib, "dinput8.lib")
+#pragma comment(lib, "dxguid.lib")
+
+#include <dinput.h>
+
 class InputClass
 {
 public:
 	InputClass();
-	InputClass(const InputClass&);
+	InputClass(const InputClass& other);
 	~InputClass();
 
-	void initialize();
+	bool initialize(HINSTANCE aHinstance, HWND aHwnd,
+		int aWidth, int aHeight);
+	void shutdown();
+	bool frame();
 
-	void keyDown(unsigned int aInput);
-	void keyUp(unsigned int aInput);
-
-	bool isKeyDown(unsigned int aKey);
+	bool isEscapePressed();
+	void getMouseLocation(int &posX, int &posY);
 
 private:
-	bool m_keys[256];
+	bool readKeyBoard();
+	bool readMouse();
+	void ProcessInput();
+
+private:
+	IDirectInput8 *m_directInput;
+	IDirectInputDevice8 *m_keyBoard;
+	IDirectInputDevice8 *m_mouse;
+
+	unsigned char m_keyboardState[256];
+	DIMOUSESTATE m_mouseState;
+
+	int m_screenWidth, m_screenHeight;
+	int m_mouseX, m_mouseY;
 };
 
 #endif // inputClass_h__

@@ -29,6 +29,7 @@ SystemClass::~SystemClass()
 
 bool SystemClass::initialize()
 {
+	bool result;
 	int screenWidth = 0;
 	int screenHeight = 0;
 	initializeWindows(screenWidth, screenHeight);
@@ -38,14 +39,21 @@ bool SystemClass::initialize()
 	{
 		return false;
 	}
-	m_input->initialize();
+	result = m_input->initialize(
+		m_hinstance, m_hwnd, screenWidth, screenHeight);
+	if (!result)
+	{
+		MessageBox(m_hwnd, L"初始化输入设备失败", L"Error", MB_OK);
+		return false;
+	}
 
 	m_graphics = new GraphicsClass;
 	if (NULL == m_graphics)
 	{
 		return false;
 	}
-	bool result = m_graphics->initialize(screenWidth, screenHeight, m_hwnd);
+	
+	result = m_graphics->initialize(screenWidth, screenHeight, m_hwnd);
 	if (false == result)
 	{
 		return false;
@@ -65,6 +73,7 @@ void SystemClass::shutdown()
 
 	if (NULL == m_input)
 	{
+		m_input->shutdown();
 		delete m_input;
 		m_input = NULL;
 	}
@@ -101,6 +110,11 @@ void SystemClass::run()
 				 done = true;
 			 }
 		 }
+
+		 if (m_input->isEscapePressed() == true)
+		 {
+			 done = true;
+		 }
 	 }
 
 	 return ;
@@ -109,13 +123,17 @@ void SystemClass::run()
 bool SystemClass::frame()
 {
 	bool result;
+	int mouseX, mouseY;
 
-	if (m_input->isKeyDown(VK_ESCAPE))
+	result = m_input->frame();
+	if (!result)
 	{
 		return false;
 	}
 
-	result = m_graphics->frame();
+	m_input->getMouseLocation(mouseX, mouseY);
+
+	result = m_graphics->frame(mouseX, mouseY);
 	if (!result)
 	{
 		return false;
@@ -128,25 +146,7 @@ LRESULT CALLBACK SystemClass::messageHandler(
 	HWND hwnd, UINT msg, 
 	WPARAM wParam, LPARAM lParam )
 {
-	switch (msg)
-	{
-	case WM_KEYDOWN:
-		{
-			m_input->keyDown((unsigned int)wParam);
-			return 0;
-		}
-
-	case WM_KEYUP:
-		{
-			m_input->keyUp((unsigned int)wParam);
-			return 0;
-		}
-
-	default:
-		{
-			return DefWindowProc(hwnd, msg, wParam, lParam);
-		}
-	}
+	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
 void SystemClass::initializeWindows( int &aWidth, int &aHeight )
