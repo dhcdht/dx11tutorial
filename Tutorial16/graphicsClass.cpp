@@ -24,6 +24,9 @@ GraphicsClass::GraphicsClass()
 	m_bitmap = 0;
 
 	m_text = 0;
+
+	m_modelList = 0;
+	m_frustum = 0;
 }
 
 GraphicsClass::GraphicsClass( const GraphicsClass& )
@@ -149,6 +152,23 @@ bool GraphicsClass::initialize( int aWidth, int aHeight, HWND aHwnd )
 		return false;
 	}
 
+	m_modelList = new ModelListClass;
+	if (!m_modelList)
+	{
+		return false;
+	}
+
+	result = m_modelList->initialize(25);
+	if (!result)
+	{
+		return false;
+	}
+
+	m_frustum = new FrustumClass;
+	if (!m_frustum)
+	{
+		return false;
+	}
 
 	m_camera->setPosition(0.0f, 0.0f, -10.0f);
 	return true;
@@ -156,6 +176,19 @@ bool GraphicsClass::initialize( int aWidth, int aHeight, HWND aHwnd )
 
 void GraphicsClass::shutdown()
 {
+	if (m_frustum)
+	{
+		delete m_frustum;
+		m_frustum = 0;
+	}
+
+	if (m_modelList)
+	{
+		m_modelList->shutdown();
+		delete m_modelList;
+		m_modelList = 0;
+	}
+
 	if (m_text)
 	{
 		delete m_text;
@@ -308,6 +341,47 @@ bool GraphicsClass::render(float aRotation)
 
 	m_d3d->getWorldMatrix(worldMatrix);
 
+	m_d3d->turnAlphaBlendingOff();
+	m_d3d->turnZBufferOn();
+
+	m_frustum->constructFrustum(SCREEN_DEPTH, projectionMatrix, viewMatrix);
+
+	int modelCount = m_modelList->getModelCount();
+	int renderCount = 0;
+	float positionX, positionY, positionZ;
+	D3DXVECTOR4 color;
+	
+	for (int index = 0; index < modelCount; index++)
+	{
+		m_modelList->getData(
+			index, positionX, positionY, positionZ, color);
+
+		if (m_frustum->checkCube(positionX, positionY, positionZ, 0.5f))
+		{
+			renderCount++;
+
+			D3DXMatrixTranslation(
+				&worldMatrix, positionX, positionY, positionZ);
+
+			m_model->render(m_d3d->getDeviceContext());
+
+			m_lightShader->render(
+				m_d3d->getDeviceContext(), m_model->getIndexCount(),
+				worldMatrix, viewMatrix, projectionMatrix,
+				m_model->getTexture(),
+				m_light->getDirection(),
+				m_light->getAmbientColor(),
+				m_light->getDiffuseColor(),
+				m_camera->getPosition(),
+				m_light->getSpecularColor(),
+				m_light->getSpecularPower());
+
+			m_d3d->getWorldMatrix(worldMatrix);
+		}
+	}
+
+	m_text->setRenderCount(renderCount, m_d3d->getDeviceContext());
+
 	result = m_text->render(
 		m_d3d->getDeviceContext(),
 		worldMatrix, orthoMatrix);
@@ -315,9 +389,6 @@ bool GraphicsClass::render(float aRotation)
 	{
 		return false;
 	}
-
-	m_d3d->turnAlphaBlendingOff();
-	m_d3d->turnZBufferOn();
 
 	m_d3d->endScene();
 

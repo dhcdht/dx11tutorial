@@ -69,6 +69,12 @@
     <ClCompile Include="timerClass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="frustumClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="modelListClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmapClass.h">
@@ -120,6 +126,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="timerClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="frustumClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="modelListClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

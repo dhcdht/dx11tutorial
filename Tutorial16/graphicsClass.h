@@ -20,6 +20,8 @@
 #include "textureShaderClass.h"
 #include "bitmapClass.h"
 #include "textClass.h"
+#include "frustumClass.h"
+#include "modelListClass.h"
 
 const bool FULL_SCREEN = false;
 const bool VSYNC_ENABLED = true;
@@ -52,6 +54,9 @@ private:
 	BitmapClass *m_bitmap;
 
 	TextClass *m_text;
+
+	ModelListClass *m_modelList;
+	FrustumClass *m_frustum;
 };
 
 #endif // graphicsClass_h__

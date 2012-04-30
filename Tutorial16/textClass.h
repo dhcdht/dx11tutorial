@@ -60,6 +60,9 @@ public:
 	bool setCPU(
 		int aCPU, ID3D11DeviceContext *aD3DDeviceContext);
 
+	bool setRenderCount(
+		int aRenderCount, ID3D11DeviceContext *aD3DDeviceContext);
+
 private:
 	bool initializeSentence(
 		SentenceType **aSentence,
@@ -85,6 +88,7 @@ private:
 	SentenceType *m_sentence2;
 	SentenceType *m_sentence3;
 	SentenceType *m_sentence4;
+	SentenceType *m_sentence5;
 };
 
 #endif // textClass_h__

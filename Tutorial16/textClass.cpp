@@ -98,6 +98,12 @@ bool TextClass::initialize(
 		return false;
 	}
 
+	result = initializeSentence(&m_sentence5, 16, aD3DDevice);
+	if (!result)
+	{
+		return false;
+	}
+
 	/*
 	result = updateSentence(
 		m_sentence1, "Hello", 100, 100, 1.0f, 1.0f, 1.0f,
@@ -129,6 +135,8 @@ void TextClass::shutdown()
 	releaseSentence(&m_sentence3);
 
 	releaseSentence(&m_sentence4);
+
+	releaseSentence(&m_sentence5);
 
 	if(m_fontShader)
 	{
@@ -180,6 +188,14 @@ bool TextClass::render(
 
 	result = renderSentence(
 		aD3DDeviceContext, m_sentence4,
+		aWorldMatrix, aOrthoMatrix);
+	if(!result)
+	{
+		return false;
+	}
+
+	result = renderSentence(
+		aD3DDeviceContext, m_sentence5,
 		aWorldMatrix, aOrthoMatrix);
 	if(!result)
 	{
@@ -506,6 +522,29 @@ bool TextClass::setCPU(
 
 	result = updateSentence(
 		m_sentence4, cpuString, 100, 160, 0.0f, 1.0f, 0.0f,
+		aD3DDeviceContext);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool TextClass::setRenderCount(
+	int aRenderCount, ID3D11DeviceContext *aD3DDeviceContext )
+{
+	char tempString[16];
+	char renderCountString[16];
+	bool result;
+
+	_itoa_s(aRenderCount, tempString, 10);
+
+	strcpy_s(renderCountString, "Render : ");
+	strcat_s(renderCountString, tempString);
+
+	result = updateSentence(
+		m_sentence5, renderCountString, 100, 180, 1.0f, 1.0f, 0.0f,
 		aD3DDeviceContext);
 	if (!result)
 	{
