@@ -73,6 +73,7 @@
     <ClCompile Include="lightShaderClass.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="modelClass.cpp" />
+    <ClCompile Include="multiTextureShaderClass.cpp" />
     <ClCompile Include="systemClass.cpp" />
     <ClCompile Include="textClass.cpp" />
     <ClCompile Include="textureClass.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="lightClass.h" />
     <ClInclude Include="lightShaderClass.h" />
     <ClInclude Include="modelClass.h" />
+    <ClInclude Include="multiTextureShaderClass.h" />
     <ClInclude Include="systemClass.h" />
     <ClInclude Include="textClass.h" />
     <ClInclude Include="textureClass.h" />
@@ -105,6 +107,8 @@
     <None Include="shader\font.vsh" />
     <None Include="shader\light.psh" />
     <None Include="shader\light.vsh" />
+    <None Include="shader\multiTexture.psh" />
+    <None Include="shader\multiTexture.vsh" />
     <None Include="shader\texture.psh" />
     <None Include="shader\texture.vsh" />
     <None Include="tex\box.png" />

@@ -399,7 +399,6 @@ bool D3DClass::initialize( int aWidth, int aHeight, bool vsync, HWND aHwnd, bool
 
 	return true;
 
-	return true;
 }
 
 void D3DClass::shutdown()

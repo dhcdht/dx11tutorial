@@ -69,6 +69,9 @@
     <ClCompile Include="timerClass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="multiTextureShaderClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmapClass.h">
@@ -122,6 +125,9 @@
     <ClInclude Include="timerClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="multiTextureShaderClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="obj\cube.txt">
@@ -155,6 +161,12 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="tex\sky.dds">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader\multiTexture.psh">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="shader\multiTexture.vsh">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
