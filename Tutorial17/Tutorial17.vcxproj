@@ -76,6 +76,7 @@
     <ClCompile Include="multiTextureShaderClass.cpp" />
     <ClCompile Include="systemClass.cpp" />
     <ClCompile Include="textClass.cpp" />
+    <ClCompile Include="textureArrayClass.cpp" />
     <ClCompile Include="textureClass.cpp" />
     <ClCompile Include="textureShaderClass.cpp" />
     <ClCompile Include="timerClass.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="multiTextureShaderClass.h" />
     <ClInclude Include="systemClass.h" />
     <ClInclude Include="textClass.h" />
+    <ClInclude Include="textureArrayClass.h" />
     <ClInclude Include="textureClass.h" />
     <ClInclude Include="textureShaderClass.h" />
     <ClInclude Include="timerClass.h" />

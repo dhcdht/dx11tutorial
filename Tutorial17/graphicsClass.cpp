@@ -24,6 +24,8 @@ GraphicsClass::GraphicsClass()
 	m_bitmap = 0;
 
 	m_text = 0;
+
+	m_multiTextureShader = 0;
 }
 
 GraphicsClass::GraphicsClass( const GraphicsClass& )
@@ -36,7 +38,8 @@ GraphicsClass::~GraphicsClass()
 
 }
 
-bool GraphicsClass::initialize( int aWidth, int aHeight, HWND aHwnd )
+bool GraphicsClass::initialize( int aWidth, int aHeight, 
+	HWND aHwnd )
 {
 	bool result;
 
@@ -149,6 +152,17 @@ bool GraphicsClass::initialize( int aWidth, int aHeight, HWND aHwnd )
 		return false;
 	}
 
+	m_multiTextureShader = new MultiTextureShaderClass;
+	if (!m_multiTextureShader)
+	{
+		return false;
+	}
+
+	result = m_multiTextureShader->initialize(m_d3d->getDevice(), aHwnd);
+	if (!result)
+	{
+		return false;
+	}
 
 	m_camera->setPosition(0.0f, 0.0f, -10.0f);
 	return true;
@@ -288,6 +302,7 @@ bool GraphicsClass::render(float aRotation)
 	
 	m_model->render(m_d3d->getDeviceContext());
 
+	/*
 	result = m_lightShader->render(
 		m_d3d->getDeviceContext(), m_model->getIndexCount(),
 		worldMatrix, viewMatrix, projectionMatrix,
@@ -302,6 +317,11 @@ bool GraphicsClass::render(float aRotation)
 	{
 		return false;
 	}
+	*/
+
+	m_multiTextureShader->render(m_d3d->getDeviceContext(),
+		m_model->getIndexCount(), worldMatrix, viewMatrix,
+		projectionMatrix, m_model->getTextures());
 	
 	m_d3d->turnZBufferOff();
 	m_d3d->turnAlphaBlendingOn();

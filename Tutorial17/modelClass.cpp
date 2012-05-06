@@ -19,6 +19,8 @@ ModelClass::ModelClass()
 	m_texture = NULL;
 
 	m_model = 0;
+
+	m_textureArray = 0;
 }
 
 ModelClass::ModelClass( const ModelClass &aModelClass )
@@ -49,7 +51,21 @@ bool ModelClass::initialize( ID3D11Device *aD3DDevice, char *aModelFileName, WCH
 		return false;
 	}
 
+	result = loadTextures(aD3DDevice, aTextureFileName, L"./tex/sky.dds");
+	if (!result)
+	{
+		return false;
+	}
+
 	return result;
+}
+
+bool ModelClass::initialize( 
+	ID3D11Device *aD3DDevice, char *aModelFileName,
+	WCHAR *aTexFileName1, WCHAR *aTexFileName2 )
+{
+	//?
+	return true;
 }
 
 void ModelClass::shutdown()
@@ -243,6 +259,13 @@ void ModelClass::releaseTexture()
 		m_texture = NULL;
 	}
 
+	if (m_textureArray)
+	{
+		m_textureArray->shutdown();
+		delete m_textureArray;
+		m_textureArray = 0;
+	}
+
 	return ;
 }
 
@@ -314,4 +337,31 @@ void ModelClass::releaseModel()
 	}
 
 	return ;
+}
+
+ID3D11ShaderResourceView** ModelClass::getTextures()
+{
+	return m_textureArray->getTextureArray();
+}
+
+bool ModelClass::loadTextures( 
+	ID3D11Device *aD3DDevice, 
+	WCHAR *aTexFileName1, WCHAR *aTexFileName2 )
+{
+	bool result;
+
+	m_textureArray = new TextureArrayClass;
+	if (!m_textureArray)
+	{
+		return false;
+	}
+
+	result = m_textureArray->initialize(aD3DDevice,
+		aTexFileName1, aTexFileName2);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
 }

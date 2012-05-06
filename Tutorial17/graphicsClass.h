@@ -20,6 +20,7 @@
 #include "textureShaderClass.h"
 #include "bitmapClass.h"
 #include "textClass.h"
+#include "multiTextureShaderClass.h"
 
 const bool FULL_SCREEN = false;
 const bool VSYNC_ENABLED = true;
@@ -52,6 +53,8 @@ private:
 	BitmapClass *m_bitmap;
 
 	TextClass *m_text;
+
+	MultiTextureShaderClass *m_multiTextureShader;
 };
 
 #endif // graphicsClass_h__
